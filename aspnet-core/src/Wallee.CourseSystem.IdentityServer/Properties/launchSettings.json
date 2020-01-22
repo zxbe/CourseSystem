@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "Wallee.CourseSystem.IdentityServer": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:44358",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
