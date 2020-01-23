@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wallee.CourseSystem.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Users.EntityFrameworkCore;
-using Wallee.CourseSystem.AggregateRootModels.Teachers;
-using Wallee.CourseSystem.AggregateRootModels.Students;
 using Wallee.CourseSystem.AggregateRootModels.Courses;
+using Wallee.CourseSystem.AggregateRootModels.Teachers;
+using Wallee.CourseSystem.Users;
 
 namespace Wallee.CourseSystem.EntityFrameworkCore
 {
