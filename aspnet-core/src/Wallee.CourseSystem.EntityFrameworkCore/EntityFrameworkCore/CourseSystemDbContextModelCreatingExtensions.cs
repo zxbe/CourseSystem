@@ -5,7 +5,6 @@ using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Users;
 using Wallee.CourseSystem.AggregateRootModels.Courses;
-using Wallee.CourseSystem.AggregateRootModels.Students;
 using Wallee.CourseSystem.AggregateRootModels.Teachers;
 
 namespace Wallee.CourseSystem.EntityFrameworkCore
@@ -24,6 +23,52 @@ namespace Wallee.CourseSystem.EntityFrameworkCore
 
             //    //...
             //});
+
+            //CourseAggragate
+            builder.Entity<Course>(it =>
+            {
+                it.ToTable("Courses");
+                it.HasKey(it => it.Id);
+                it.ConfigureByConvention();
+                it.Property(it => it.Name).IsRequired().HasMaxLength(100);
+                it.Property(it => it.Description).IsRequired().HasMaxLength(300);
+                it.Property(it => it.CourseType).IsRequired();
+                it.Property(it => it.UnitPrice).IsRequired();
+            });
+            builder.Entity<Class>(it =>
+            {
+                it.ToTable("Classes");
+                it.HasKey(it => it.Id);
+                it.ConfigureByConvention();
+                it.Property(it => it.ClassName).IsRequired().HasMaxLength(100);
+                it.Property(it => it.ClassDescription).IsRequired().HasMaxLength(200);
+                it.Property(it => it.StartDate).IsRequired();
+                it.Property(it => it.EndDate).IsRequired();
+
+            });
+            builder.Entity<ClassRoom>(it =>
+            {
+                it.ToTable("ClassRooms");
+                it.HasKey(it => it.Id);
+                it.ConfigureByConvention();
+                it.Property(it => it.Name).IsRequired().HasMaxLength(100);
+                it.Property(it => it.Description).IsRequired().HasMaxLength(200);
+                it.Property(it => it.Zone).IsRequired().HasMaxLength(50);
+                it.Property(it => it.Capacity).IsRequired();
+
+            });
+            builder.Entity<ClassSchedule>(it =>
+            {
+                it.ToTable("ClassSchedules");
+                it.HasKey(it => it.Id);
+                it.ConfigureByConvention();
+                it.Property(it => it.ClassName).IsRequired().HasMaxLength(100);
+                it.Property(it => it.ClassDescription).IsRequired().HasMaxLength(200);
+                it.Property(it => it.StartDateTime).IsRequired();
+                it.Property(it => it.EndDateTime).IsRequired();
+                it.Property(it => it.ActualStudentCount).IsRequired(false);
+                it.HasOne<ClassRoom>().WithMany(it => it.ClassSchedules).HasForeignKey(it => it.ClassRoomId).OnDelete(DeleteBehavior.Restrict);
+            });
             builder.Entity<Teacher>(it =>
             {
                 it.ToTable("Teachers");
@@ -51,17 +96,7 @@ namespace Wallee.CourseSystem.EntityFrameworkCore
                 .HasForeignKey(it => it.TeacherId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             });
-            builder.Entity<Course>(it =>
-            {
-                it.ToTable("Courses");
-                it.HasKey(it => it.Id);
-                it.ConfigureByConvention();
-                it.Property(it => it.Name).IsRequired().HasMaxLength(100);
-                it.Property(it => it.Description).IsRequired().HasMaxLength(300);
-                it.Property(it => it.CourseType).IsRequired();
-                it.HasOne<Teacher>().WithMany().HasForeignKey(it => it.TeacherId)
-                .IsRequired().OnDelete(DeleteBehavior.Cascade);
-            });
+
             builder.Entity<CourseRegistration>(it =>
             {
                 it.ToTable("CourseRegistrations");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Wallee.CourseSystem.AggregateRootModels.Courses
@@ -24,6 +25,10 @@ namespace Wallee.CourseSystem.AggregateRootModels.Courses
         /// 能够容纳的学生数
         /// </summary>
         public virtual int Capacity { get; private set; }
+        /// <summary>
+        /// 课程安排计划
+        /// </summary>
+        public ICollection<ClassSchedule> ClassSchedules { get; private set; }
         protected ClassRoom()
         {
 
@@ -39,6 +44,7 @@ namespace Wallee.CourseSystem.AggregateRootModels.Courses
             Description = description;
             Zone = zone;
             Capacity = capacity;
+            ClassSchedules = new List<ClassSchedule>();
         }
     }
 }

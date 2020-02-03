@@ -26,7 +26,7 @@ namespace Wallee.CourseSystem.AggregateRootModels.Courses
         /// </summary>
         public virtual string Description { get; private set; }
         /// <summary>
-        /// 课程类型
+        /// 课程类型，对应学校的中心
         /// </summary>
         public virtual CourseType CourseType { get; private set; }
         /// <summary>

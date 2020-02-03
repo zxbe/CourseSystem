@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 using Volo.Abp.Modularity;
+using Volo.Abp.Testing;
 using Volo.Abp.Uow;
 
 namespace Wallee.CourseSystem
@@ -32,7 +33,7 @@ namespace Wallee.CourseSystem
                 {
                     action();
 
-                    uow.Complete();
+                    uow.CompleteAsync();
                 }
             }
         }
@@ -71,7 +72,7 @@ namespace Wallee.CourseSystem
                 using (var uow = uowManager.Begin(options))
                 {
                     var result = func();
-                    uow.Complete();
+                    uow.CompleteAsync();
                     return result;
                 }
             }
