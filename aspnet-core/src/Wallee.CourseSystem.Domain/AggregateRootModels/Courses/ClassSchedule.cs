@@ -3,6 +3,9 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Wallee.CourseSystem.AggregateRootModels.Courses
 {
+    /// <summary>
+    /// 课程调度表
+    /// </summary>
     public class ClassSchedule : AuditedEntity<Guid>
     {
         /// <summary>
